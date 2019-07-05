@@ -124,11 +124,11 @@ export default class BlogHome extends React.Component {
 		if (this.state.doc) {
 			return (
 				<div>
-					<Helmet>
+					{/* <Helmet> */}
 						<title>{RichText.asText(this.state.doc.data.headline)}</title>
-					</Helmet>
+					{/* </Helmet> */}
 					{this.blogHomeHead()}
-					{this.blogPostsSection()}
+					{/* {this.blogPostsSection()} */}
 					<Footer />
 				</div>
 			);

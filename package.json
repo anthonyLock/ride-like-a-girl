@@ -3,6 +3,8 @@
   "version": "0.1.5",
   "private": true,
   "dependencies": {
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-plugin-react": "^7.14.2",
     "highlight.js": "~9.13.1",
     "prismic-javascript": "^2.0.1",
     "prismic-reactjs": "^0.3.2",
@@ -10,7 +12,9 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-helmet": "^5.2.0",
+    "react-redux": "^7.1.0",
     "react-router-dom": "~4.3.1",
+    "redux": "^4.0.1",
     "semantic-ui-react": "^0.87.2",
     "whatwg-fetch": "~3.0.0"
   },

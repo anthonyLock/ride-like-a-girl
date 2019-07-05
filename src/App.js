@@ -1,39 +1,61 @@
 import React from 'react';
 import {
-  BrowserRouter as Router,
   Route,
   Switch,
-  Redirect,
 } from 'react-router-dom';
 import { Grid } from 'semantic-ui-react'
+import { connect } from 'react-redux';
 
-
-
-import Preview from './Preview';
 import NotFound from './components/NotFound';
-import Post from './components/Post';
-import BlogHome from './components/BlogHome';
 import Navigator from './components/misc/Navigator';
+import Home from './components/home/Home';
+import { HOME_PRISMIC_LOAD } from './redux/reducers/home';
+import Loader from './components/Loader';
 
-const App = (props) => (
-  <Router>
-      <Grid columns={2}>
-        <Grid.Row>
-          <Grid.Column width={2}>
-            <Navigator/>
-          </Grid.Column>
-          <Grid.Column width={14}>
-            <Switch>
-              <Redirect exact from="/blog/" to="/" />
-              <Route exact path="/" render={routeProps => <BlogHome {...routeProps} prismicCtx={props.prismicCtx} />} />
-              <Route exact path="/preview" render={routeProps => <Preview {...routeProps} prismicCtx={props.prismicCtx} />} />
-              <Route exact path="/blog/:uid" render={routeProps => <Post {...routeProps} prismicCtx={props.prismicCtx} />} />
-              <Route component={NotFound} />
-            </Switch>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-  </Router>
-);
+const App = ({
+  loading,
+  loadHome,
+}) => {
+  if (loading) {
+    return(<Loader/>)
+  } else {
+    return(
+      <div>
+          <Grid columns={2}>
+            <Grid.Row>
+              <Grid.Column width={2}>
+                <Navigator/>
+              </Grid.Column>
+              <Grid.Column width={14}>
+                <Switch>
+                  <Route exact path="/" render={() =>{
+                      loadHome()
+                      return(<Home />)
+                    } 
+                  }
+                  />
+                  <Route component={NotFound} />
+                </Switch>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+      </div>
+    );
+  }
+}
 
-export default App;
+
+const mapStateToProps = state => ({
+  loading: state.prismic.loading,
+});
+
+const mapDispatchToProps = dispatch => ({
+  loadHome: () => dispatch({
+    type: HOME_PRISMIC_LOAD,
+  }),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(App);
