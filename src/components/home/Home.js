@@ -2,7 +2,7 @@ import React from 'react';
 import {RichText} from 'prismic-reactjs';
 import { connect } from 'react-redux';
 
-import Loader from '../Loader';
+import Loader from '../misc/Loader';
 import NotFound from '../NotFound';
 
 

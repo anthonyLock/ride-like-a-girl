@@ -5,17 +5,21 @@ import {
 } from 'react-router-dom';
 import { Grid } from 'semantic-ui-react'
 import { connect } from 'react-redux';
+import {withRouter} from 'react-router';
 
 import NotFound from './components/NotFound';
 import Navigator from './components/misc/Navigator';
 import Home from './components/home/Home';
 import { HOME_PRISMIC_LOAD } from './redux/reducers/home';
-import Loader from './components/Loader';
+import Loader from './components/misc/Loader';
+
+import About from './components/about/About';
 
 const App = ({
   loading,
   loadHome,
 }) => {
+  console.log("HERWE")
   if (loading) {
     return(<Loader/>)
   } else {
@@ -31,6 +35,12 @@ const App = ({
                   <Route exact path="/" render={() =>{
                       loadHome()
                       return(<Home />)
+                    } 
+                  }
+                  />
+                  <Route exact path="/about/:id" render={() =>{
+                      // loadHome()
+                      return(<About />)
                     } 
                   }
                   />
@@ -55,7 +65,7 @@ const mapDispatchToProps = dispatch => ({
   }),
 });
 
-export default connect(
+export default withRouter( connect(
   mapStateToProps,
   mapDispatchToProps,
-)(App);
+)(App));

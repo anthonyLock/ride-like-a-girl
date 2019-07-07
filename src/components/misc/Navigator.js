@@ -1,30 +1,54 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import { Dropdown, Menu } from 'semantic-ui-react'
+import navImage from './nav-image.jpg'
 
-const Navigator = () => (
+const Navigator = () => {
+  const avatar = {backgroundImage: `url(${navImage})`};
+  return (
     <div>
-        {/* <div>Hello World Navigator</div>
-        <Link to="/blog/hello-welcome-to-test-1">About</Link> */}
-    <Menu secondary vertical>
-        <Menu.Item
-          name='account'
-          active={true}
-        />
-        <Menu.Item
-          name='settings'
-          active={false}
-        />
-        <Dropdown item text='Display Options'>
+      <Menu secondary vertical>
+      <Link to="/">
+        <Menu.Item className="nav-bar-item" >
+          <div id="nav-avatar" style={avatar}/>
+        </Menu.Item>
+        </Link>
+        <Link to="/news">
+          <Menu.Item className="nav-bar-item"
+            name='News'
+          />
+        </Link>
+        <Link to="/races">
+          <Menu.Item className="nav-bar-item"
+            name='Races'
+          />
+        </Link>
+        <Dropdown item text='About Us' className="nav-bar-item">
           <Dropdown.Menu>
-            <Dropdown.Header>Text Size</Dropdown.Header>
-            <Dropdown.Item>Small</Dropdown.Item>
-            <Dropdown.Item>Medium</Dropdown.Item>
-            <Dropdown.Item>Large</Dropdown.Item>
+            <Link to="/about/rlag">
+              <Dropdown.Item>RLAG</Dropdown.Item>
+            </Link>
+            <Link to="/about/elle">
+              <Dropdown.Item>Elle</Dropdown.Item>
+            </Link>
+            <Link to="/about/amy">
+              <Dropdown.Item>Amy</Dropdown.Item>
+            </Link>
           </Dropdown.Menu>
         </Dropdown>
+        <Link to="/sponsors">
+          <Menu.Item className="nav-bar-item"
+            name='sponsors'
+          />
+        </Link>
+        <Link to="/kit-shop">
+          <Menu.Item className="nav-bar-item"
+            name='Kit Shop'
+          />
+        </Link>
       </Menu>
     </div>
-);
+  )
+};
 
 export default Navigator;
