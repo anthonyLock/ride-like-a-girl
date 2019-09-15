@@ -11,15 +11,16 @@ import NotFound from './components/NotFound';
 import Navigator from './components/misc/Navigator';
 import Home from './components/home/Home';
 import { HOME_PRISMIC_LOAD } from './redux/reducers/home';
+import { ABOUT_PRISMIC_LOAD } from './redux/reducers/about';
 import Loader from './components/misc/Loader';
 
-import About from './components/about/About';
+import About from './components/about/about';
 
 const App = ({
   loading,
   loadHome,
+  loadAbout,
 }) => {
-  console.log("HERWE")
   if (loading) {
     return(<Loader/>)
   } else {
@@ -27,10 +28,10 @@ const App = ({
       <div>
           <Grid columns={2}>
             <Grid.Row>
-              <Grid.Column width={2}>
+              <Grid.Column width={5}>
                 <Navigator/>
               </Grid.Column>
-              <Grid.Column width={14}>
+              <Grid.Column width={11}>
                 <Switch>
                   <Route exact path="/" render={() =>{
                       loadHome()
@@ -38,8 +39,8 @@ const App = ({
                     } 
                   }
                   />
-                  <Route exact path="/about/:id" render={() =>{
-                      // loadHome()
+                  <Route exact path="/about/:id" render={({match}) =>{
+                      loadAbout(match.params.id)
                       return(<About />)
                     } 
                   }
@@ -62,6 +63,12 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   loadHome: () => dispatch({
     type: HOME_PRISMIC_LOAD,
+  }),
+  loadAbout: (id) => dispatch({
+    type: ABOUT_PRISMIC_LOAD,
+    value: {
+      id: id,
+    }
   }),
 });
 
