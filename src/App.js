@@ -2,10 +2,10 @@ import React from 'react';
 import {
   Route,
   Switch,
+  withRouter,
 } from 'react-router-dom';
 import { Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
 
 import NotFound from './components/NotFound';
 import Navigator from './components/misc/Navigator';
@@ -14,7 +14,7 @@ import { HOME_PRISMIC_LOAD } from './redux/reducers/home';
 import { ABOUT_PRISMIC_LOAD } from './redux/reducers/about';
 import Loader from './components/misc/Loader';
 
-import About from './components/about/about';
+import About from './components/about/About';
 
 const App = ({
   loading,
@@ -22,45 +22,16 @@ const App = ({
   loadAbout,
 }) => {
   if (loading) {
-    return(<Loader/>)
-  } else {
-    return(
-      <div>
-          <Grid columns={2}>
-            <Grid.Row>
-              <Grid.Column width={5}>
-                <Navigator/>
-              </Grid.Column>
-              <Grid.Column width={11}>
-                <Switch>
-                  <Route exact path="/" render={() =>{
-                      loadHome()
-                      return(<Home />)
-                    } 
-                  }
-                  />
-                  <Route exact path="/about/:id" render={({match}) =>{
-                      loadAbout(match.params.id)
-                      return(<About />)
-                    } 
-                  }
-                  />
-                  <Route component={NotFound} />
-                </Switch>
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-      </div>
-    );
+    return (<Loader />);
   }
   return (
     <div>
       <Grid columns={2}>
         <Grid.Row>
-          <Grid.Column width={2}>
+          <Grid.Column width={5}>
             <Navigator />
           </Grid.Column>
-          <Grid.Column width={14}>
+          <Grid.Column width={11}>
             <Switch>
               <Route
                 exact
@@ -74,7 +45,8 @@ const App = ({
               <Route
                 exact
                 path="/about/:id"
-                render={() => {
+                render={({ match }) => {
+                  loadAbout(match.params.id);
                   return (<About />);
                 }
               }
@@ -100,8 +72,8 @@ const mapDispatchToProps = dispatch => ({
   loadAbout: (id) => dispatch({
     type: ABOUT_PRISMIC_LOAD,
     value: {
-      id: id,
-    }
+      id,
+    },
   }),
 });
 
