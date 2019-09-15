@@ -6,9 +6,9 @@ const defaultView = (slice) => {
 		<div className="post-part single container">
 			<div className="block-img">
 				<img src={slice.primary.image.url} alt={slice.primary.image.alt} />
-				{ RichText.asText(slice.primary.caption) !== ""
+				{ RichText.render(slice.primary.caption) !== ""
 					? <p><span className="image-label">
-						{RichText.asText(slice.primary.caption)}
+						{RichText.render(slice.primary.caption)}
 						</span></p>
 					: null
 				}
@@ -22,9 +22,9 @@ const emphasized = (slice) => {
 		<div className="post-part single container">
 			<div className="block-img emphasized">
 				<img src={slice.primary.image.url} alt={slice.primary.image.alt} />
-				{ RichText.asText(slice.primary.caption) !== ""
+				{ RichText.render(slice.primary.caption) !== ""
 					? <p><span className="image-label">
-						{RichText.asText(slice.primary.caption)}
+						{RichText.render(slice.primary.caption)}
 						</span></p>
 					: null
 				}
@@ -38,8 +38,8 @@ const imageFullWidth = (slice) => {
 		<div className="blog-header single"
 		style={{backgroundImage: 'url('+ slice.primary.image.url +')'}}>
 			<div className="wrapper">
-				{ RichText.asText(slice.primary.caption) !== ""
-					? <h1>{RichText.asText(slice.primary.caption)}</h1>
+				{ RichText.render(slice.primary.caption) !== ""
+					? <h1>{RichText.render(slice.primary.caption)}</h1>
 					: null
 				}
 			</div>

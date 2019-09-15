@@ -7,19 +7,23 @@ import {
 import { Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
-import NotFound from './components/NotFound';
-import Navigator from './components/misc/Navigator';
-import Home from './components/home/Home';
 import { HOME_PRISMIC_LOAD } from './redux/reducers/home';
 import { ABOUT_PRISMIC_LOAD } from './redux/reducers/about';
+
+import NotFound from './components/NotFound';
+import Navigator from './components/misc/Navigator';
 import Loader from './components/misc/Loader';
 
+import Home from './components/home/Home';
 import About from './components/about/About';
+import Sponsors from './components/sponsors/Sponsors';
+import { SPONSORS_PRISMIC_LOAD } from './redux/reducers/sponsors';
 
 const App = ({
   loading,
   loadHome,
   loadAbout,
+  loadSponsors,
 }) => {
   if (loading) {
     return (<Loader />);
@@ -48,8 +52,15 @@ const App = ({
                 render={({ match }) => {
                   loadAbout(match.params.id);
                   return (<About />);
-                }
-              }
+                }}
+              />
+              <Route
+                exact
+                path="/sponsors"
+                render={() => {
+                  loadSponsors();
+                  return (<Sponsors />);
+                }}
               />
               <Route component={NotFound} />
             </Switch>
@@ -68,6 +79,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   loadHome: () => dispatch({
     type: HOME_PRISMIC_LOAD,
+  }),
+  loadSponsors: () => dispatch({
+    type: SPONSORS_PRISMIC_LOAD,
   }),
   loadAbout: (id) => dispatch({
     type: ABOUT_PRISMIC_LOAD,

@@ -8,16 +8,19 @@ import {
 // Local Imports:
 import HomeReducer from './reducers/home';
 import About from './reducers/about';
+import SponsorsReducer from './reducers/sponsors';
 import PrismicReducer, { INIT_PRISMIC } from './reducers/prismic';
 
 import { HomeMiddleware } from './middleware/homeMiddleware';
 import { PrismicMiddleware } from './middleware/prismicMiddleware';
-import {AboutMiddleware} from './middleware/aboutMiddleware';
+import { AboutMiddleware } from './middleware/aboutMiddleware';
+import { SponsorsMiddleware } from './middleware/sponsorsMiddleware';
 
 const rootReducers = combineReducers({
   about: About,
   home: HomeReducer,
   prismic: PrismicReducer,
+  sponsors: SponsorsReducer,
 });
 
 // eslint-disable-next-line no-underscore-dangle
@@ -30,6 +33,7 @@ const store = createStore(
       HomeMiddleware,
       AboutMiddleware,
       PrismicMiddleware,
+      SponsorsMiddleware,
     ),
   ),
 );

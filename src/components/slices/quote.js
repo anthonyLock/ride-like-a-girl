@@ -5,7 +5,7 @@ import {RichText} from 'prismic-reactjs';
 const Quote =({slice}) => (
 	<div className="post-part single container">
 		<span className="block-quotation">
-			{RichText.asText(slice.primary.quote)}
+			{RichText.render(slice.primary.quote)}
 		</span>
 	</div>
 )
