@@ -6,12 +6,16 @@ import {
 } from 'redux';
 
 // Local Imports:
-import { HomeMiddleware } from './middleware/homeMiddleware';
 import HomeReducer from './reducers/home';
+import About from './reducers/about';
 import PrismicReducer, { INIT_PRISMIC } from './reducers/prismic';
+
+import { HomeMiddleware } from './middleware/homeMiddleware';
 import { PrismicMiddleware } from './middleware/prismicMiddleware';
+import {AboutMiddleware} from './middleware/aboutMiddleware';
 
 const rootReducers = combineReducers({
+  about: About,
   home: HomeReducer,
   prismic: PrismicReducer,
 });
@@ -24,6 +28,7 @@ const store = createStore(
   composeEnhancer(
     applyMiddleware(
       HomeMiddleware,
+      AboutMiddleware,
       PrismicMiddleware,
     ),
   ),
