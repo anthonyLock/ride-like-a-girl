@@ -25,8 +25,8 @@ const Home = ({
   return (
     <div className="home">
       <div className="blog-avatar" style={avatar} />
-      <h1 className="blog-title">{RichText.render(headline)}</h1>
-      <p className="blog-description">{RichText.render(description)}</p>
+      <div className="blog-title">{RichText.render(headline)}</div>
+      <div className="blog-description">{RichText.render(description)}</div>
     </div>
   );
 };

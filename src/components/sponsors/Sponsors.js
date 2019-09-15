@@ -7,11 +7,6 @@ import Loader from '../misc/Loader';
 import NotFound from '../NotFound';
 
 
-// import Text from '../slices/text';
-// import Quote from '../slices/quote';
-// import ImageCaption from '../slices/imageCaption';
-
-
 const renderSliceZone = (sliceZone) => sliceZone.map((slice) => (
   <div>
     <h3 className="sponsor-title">{RichText.render(slice.primary.sponsor_name)}</h3>
@@ -45,8 +40,8 @@ const Sponsors = ({
   }
   return (
     <div className="sponsor">
-      <h1 className="sponsor-title">{RichText.render(title)}</h1>
-      <p className="sponsor-description">{RichText.render(description)}</p>
+      <div className="sponsor-title">{RichText.render(title)}</div>
+      <div className="sponsor-description">{RichText.render(description)}</div>
       <hr />
       {renderSliceZone(sliceZone)}
     </div>

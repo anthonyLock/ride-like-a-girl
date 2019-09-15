@@ -13,17 +13,23 @@ import { ABOUT_PRISMIC_LOAD } from './redux/reducers/about';
 import NotFound from './components/NotFound';
 import Navigator from './components/misc/Navigator';
 import Loader from './components/misc/Loader';
+import Overview from './components/news/overview';
+import NewsItem from './components/news/Item';
 
 import Home from './components/home/Home';
 import About from './components/about/About';
 import Sponsors from './components/sponsors/Sponsors';
 import { SPONSORS_PRISMIC_LOAD } from './redux/reducers/sponsors';
+import { NEWS_OVERVIEW_PRISMIC_LOAD } from './redux/reducers/newsOverview';
+import { NEWS_ITEM_PRISMIC_LOAD } from './redux/reducers/newsItem';
 
 const App = ({
   loading,
   loadHome,
   loadAbout,
   loadSponsors,
+  loadNewsOverview,
+  loadItem,
 }) => {
   if (loading) {
     return (<Loader />);
@@ -62,6 +68,22 @@ const App = ({
                   return (<Sponsors />);
                 }}
               />
+              <Route
+                exact
+                path="/news"
+                render={() => {
+                  loadNewsOverview(1);
+                  return (<Overview />);
+                }}
+              />
+              <Route
+                exact
+                path="/news/:id"
+                render={({ match }) => {
+                  loadItem(match.params.id);
+                  return (<NewsItem />);
+                }}
+              />
               <Route component={NotFound} />
             </Switch>
           </Grid.Column>
@@ -83,8 +105,20 @@ const mapDispatchToProps = dispatch => ({
   loadSponsors: () => dispatch({
     type: SPONSORS_PRISMIC_LOAD,
   }),
+  loadNewsOverview: (page) => dispatch({
+    type: NEWS_OVERVIEW_PRISMIC_LOAD,
+    value: {
+      pageNumber: page,
+    },
+  }),
   loadAbout: (id) => dispatch({
     type: ABOUT_PRISMIC_LOAD,
+    value: {
+      id,
+    },
+  }),
+  loadItem: (id) => dispatch({
+    type: NEWS_ITEM_PRISMIC_LOAD,
     value: {
       id,
     },

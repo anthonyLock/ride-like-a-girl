@@ -39,7 +39,7 @@ const imageFullWidth = (slice) => {
 		style={{backgroundImage: 'url('+ slice.primary.image.url +')'}}>
 			<div className="wrapper">
 				{ RichText.render(slice.primary.caption) !== ""
-					? <h1>{RichText.render(slice.primary.caption)}</h1>
+					? <div>{RichText.render(slice.primary.caption)}</div>
 					: null
 				}
 			</div>

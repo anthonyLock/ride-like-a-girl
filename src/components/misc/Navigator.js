@@ -18,11 +18,11 @@ const Navigator = () => {
             name='News'
           />
         </Link>
-        <Link to="/races">
+        <a href="https://www.facebook.com/groups/472011266648500/events/">
           <Menu.Item className="nav-bar-item"
             name='Races'
           />
-        </Link>
+        </a>
         <Dropdown item text='About Us' className="nav-bar-item">
           <Dropdown.Menu>
             <Link to="/about/rlag">
