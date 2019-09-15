@@ -3,9 +3,9 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import { Grid } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import {withRouter} from 'react-router';
+import { withRouter } from 'react-router';
 
 import NotFound from './components/NotFound';
 import Navigator from './components/misc/Navigator';
@@ -19,40 +19,43 @@ const App = ({
   loading,
   loadHome,
 }) => {
-  console.log("HERWE")
   if (loading) {
-    return(<Loader/>)
-  } else {
-    return(
-      <div>
-          <Grid columns={2}>
-            <Grid.Row>
-              <Grid.Column width={2}>
-                <Navigator/>
-              </Grid.Column>
-              <Grid.Column width={14}>
-                <Switch>
-                  <Route exact path="/" render={() =>{
-                      loadHome()
-                      return(<Home />)
-                    } 
-                  }
-                  />
-                  <Route exact path="/about/:id" render={() =>{
-                      // loadHome()
-                      return(<About />)
-                    } 
-                  }
-                  />
-                  <Route component={NotFound} />
-                </Switch>
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-      </div>
-    );
+    return (<Loader />);
   }
-}
+  return (
+    <div>
+      <Grid columns={2}>
+        <Grid.Row>
+          <Grid.Column width={2}>
+            <Navigator />
+          </Grid.Column>
+          <Grid.Column width={14}>
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={() => {
+                  loadHome();
+                  return (<Home />);
+                }
+              }
+              />
+              <Route
+                exact
+                path="/about/:id"
+                render={() => {
+                  return (<About />);
+                }
+              }
+              />
+              <Route component={NotFound} />
+            </Switch>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    </div>
+  );
+};
 
 
 const mapStateToProps = state => ({
@@ -65,7 +68,7 @@ const mapDispatchToProps = dispatch => ({
   }),
 });
 
-export default withRouter( connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps,
 )(App));
